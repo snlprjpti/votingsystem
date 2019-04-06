@@ -16,7 +16,6 @@
         </div>
 
 
-
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header"></li>
             <li>
@@ -25,25 +24,43 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+
+            @can('isAdmin', auth()->user())
+                <li>
+                    <a href="{{url('/admin/user')}}">
+                        <i class="fa fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{url('/admin/organizer')}}">
+                        <i class="fa fa-first-order"></i>
+                        <span>Organizer</span>
+                    </a>
+                </li>
+            @endcan
+
+
+            @can('isOrganizer', auth()->user())
+
             <li>
-                <a href="{{url('/admin/organizer')}}">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Organizer</span>
+                <a href="{{url('/organizer/events')}}">
+                    <i class="fa fa-edge"></i>
+                    <span>Events</span>
                 </a>
             </li>
             <li>
-                <a href="{{url('/organizer/events')}}">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Events</span>
-                </a>
-            </li> <li>
                 <a href="{{url('/organizer/voters')}}">
-                    <i class="fa fa-dashboard"></i>
+                    <i class="fa fa-address-book"></i>
                     <span>Voters</span>
                 </a>
-            </li> <li>
+            </li>
+            @endcan
+
+            <li>
                 <a href="{{url('voter/events')}}">
-                    <i class="fa fa-dashboard"></i>
+                    <i class="fa fa-bars"></i>
                     <span>Events</span>
                 </a>
             </li>

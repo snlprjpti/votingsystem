@@ -11,6 +11,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', 'HomeController@index')->name('home');
 
     Route::prefix('admin')->group(function () {
+        Route::resource('/user', 'AdminController');
         Route::resource('/organizer', 'OrganizerController');
     });
 
@@ -20,7 +21,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
 
-    Route::prefix('admin')->group(function () {
+    Route::prefix('voter')->group(function () {
         Route::resource('/organizer', 'OrganizerController')->middleware('verified');
     });
 

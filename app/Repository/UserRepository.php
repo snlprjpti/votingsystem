@@ -34,6 +34,12 @@ class UserRepository
         return $user;
     }
 
+    public function getAdmin()
+    {
+        $result = $this->user->where('type','admin')->get();
+        return $result;
+    }
+
     public function getOrganizer()
     {
         $result = $this->user->where('type','org')->get();

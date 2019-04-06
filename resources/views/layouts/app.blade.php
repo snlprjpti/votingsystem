@@ -28,7 +28,7 @@
     <div class="col-md-6 col-md-offset-3" style="margin-top: 90px;">
         <div class="login-box-body" style="border-radius: 5px">
             <div class="login-logo" style="background-color: #ecf0f5; padding: 20px;">
-                <span class="loginSystem"><b>Login Credentials</b></span>
+                <span class="loginSystem"><b>Online Voting</b></span>
             </div>
             @yield('content')
             <br>

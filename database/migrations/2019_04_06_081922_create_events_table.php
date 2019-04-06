@@ -19,8 +19,9 @@ class CreateEventsTable extends Migration
             $table->longText('details')->nullable();
             $table->enum('status',['active','inactive']);
             $table->date('event_date');
-            $table->integer('org_id')->unsigned();
-            $table->foreign('org_id')->references('id')->on('users')->onUpdate('cascade');
+
+            $table->integer('organizer_id');
+
             $table->timestamps();
             $table->softDeletes();
         });
