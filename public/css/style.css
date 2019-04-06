@@ -1,0 +1,23 @@
+.backgroundLogin{
+    background-image:url(../uploads/images/backgroundLogin.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+}
+
+.loginSystem{
+    font-size: 15px;  color: #0b58a2;
+}
+
+.loginTitle b{
+    font-size: 18px; text-align: center; color: #9f191f
+}
+
+.boxTopButton {
+    margin-right: 5px;
+}
