@@ -15,9 +15,14 @@ class CreateCandidatesTable extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('post_name');
 
+            $table->unsignedBigInteger('post_id')->unsigned();
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
 
+            $table->unsignedBigInteger('organizer_id')->unsigned();
+            $table->foreign('organizer_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->string('candidate_name');
 
             $table->timestamps();
         });

@@ -17,7 +17,7 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
             $table->string('event_name');
             $table->longText('details')->nullable();
-            $table->enum('status',['active','inactive']);
+            $table->enum('status',['active','inactive'])->default('inactive');
             $table->date('event_date');
 
             $table->integer('organizer_id');

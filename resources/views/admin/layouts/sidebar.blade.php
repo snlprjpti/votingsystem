@@ -44,27 +44,41 @@
 
             @can('isOrganizer', auth()->user())
 
-            <li>
-                <a href="{{url('/organizer/events')}}">
-                    <i class="fa fa-edge"></i>
-                    <span>Events</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{url('/organizer/voters')}}">
-                    <i class="fa fa-address-book"></i>
-                    <span>Voters</span>
-                </a>
-            </li>
+                <li>
+                    <a href="{{url('/organizer/events')}}">
+                        <i class="fa fa-edge"></i>
+                        <span>Events</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('/organizer/posts')}}">
+                        <i class="fa fa-address-book"></i>
+                        <span>Posts</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{url('/organizer/candidates')}}">
+                        <i class="fa fa-child"></i>
+                        <span>Candidates</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('/organizer/voters')}}">
+                        <i class="fa fa-address-book"></i>
+                        <span>Voters</span>
+                    </a>
+                </li>
             @endcan
 
-            <li>
-                <a href="{{url('voter/events')}}">
-                    <i class="fa fa-bars"></i>
-                    <span>Events</span>
-                </a>
-            </li>
-
+            @can('isVoter', auth()->user())
+                <li>
+                    <a href="{{url('voter/events')}}">
+                        <i class="fa fa-bars"></i>
+                        <span>Events</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </section>
 </aside>

@@ -47,7 +47,8 @@
     <script>
         //Date picker
         $('#datepicker').datepicker({
-            autoclose: true
+            autoclose: true,
+            format: 'yy-mm-dd'
         })
         $('#email_date').datepicker({
             autoclose: true

@@ -13,7 +13,6 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->truncate();
         $rows = [
-
             [
                 'name' => 'Admin',
                 'email' => 'a@a.com',

@@ -6,9 +6,10 @@ use App\Http\Requests\OrganizerRequest;
 use App\Repository\UserRepository;
 use App\User;
 use Carbon\Carbon;
-use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -28,11 +29,12 @@ class AdminController extends Controller
     {
         $this->userRepository = $userRepository;
         $this->user = $user;
-        if (Gate::allows('isAdmin')) {
-            return true;
-        } else {
-            return false;
-        }
+        $this->middleware(function ($request, $next) {
+            if(Gate::allows('isAdmin')){
+                return $next($request);
+            }
+            abort(401);
+        });
     }
 
     /**
