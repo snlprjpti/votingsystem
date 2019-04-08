@@ -13,6 +13,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('admin')->group(function () {
         Route::resource('/user', 'AdminController');
         Route::resource('/organizer', 'OrganizerController');
+        Route::get('/events', 'OrganizerController@events');
+        Route::get('/event/status/{id}', 'OrganizerController@eventStatus');
     });
 
     Route::prefix('organizer')->group(function () {
@@ -27,6 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('voter')->group(function () {
         Route::get('/events', 'VoterController@index');
         Route::get('/event/details/{id}', 'VoterController@eventShow');
+        Route::post('/event/vote/{id}', 'VoterController@voteCandidate');
     });
 
 });

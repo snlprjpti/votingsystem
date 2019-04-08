@@ -34,10 +34,10 @@
                                             <th>Event Name</th>
                                             <th>Event Details</th>
                                             <th>Date</th>
+                                            <th>Organizer</th>
                                             <th style="width: 70px;" class="text-right">Action</th>
                                         </tr>
                                         </thead>
-
                                         <tbody>
                                         <?php
                                         $i = 1;
@@ -48,14 +48,26 @@
                                                 <td>{{$event->event_name}}</td>
                                                 <td>{{$event->details}}</td>
                                                 <td>{{$event->event_date}}</td>
-                                                <td>
-                                                    @if(Auth::user()->can_vote == 'yes')
-                                                        <a class="btn btn-default btn-sm"
-                                                           href="{{url('voter/event/details',$event->id)}}">View Details
+                                                <td>{{$event->organizer->name}}</td>
+                                                <td class="text-right">
+
+                                                    @if($event->status == 'active')
+                                                        <a class="label label-success stat"
+                                                           href="{{url('admin/event/status',$event->id)}}">
+                                                            <strong class="stat"> Active
+                                                            </strong>
                                                         </a>
-                                                    @else
-                                                        <a class="text-danger">N/A</a>
+
+                                                    @elseif($event->status == 'inactive')
+                                                        <a class="label label-danger stat"
+                                                           href="{{url('admin/event/status',$event->id)}}">
+                                                            <strong class="stat">Inactive
+                                                            </strong>
+                                                        </a>
                                                     @endif
+
+
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -70,7 +82,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>

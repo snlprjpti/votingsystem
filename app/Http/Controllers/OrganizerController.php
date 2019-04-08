@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use App\Http\Requests\OrganizerRequest;
 use App\Repository\UserRepository;
 use App\User;
@@ -19,14 +20,19 @@ class OrganizerController extends Controller
      * @var User
      */
     private $user;
+    /**
+     * @var Event
+     */
+    private $event;
 
     /**
      * OrganizerController constructor.
      */
-    public function __construct(UserRepository $userRepository, User $user)
+    public function __construct(UserRepository $userRepository, User $user, Event $event)
     {
         $this->userRepository = $userRepository;
         $this->user = $user;
+        $this->event = $event;
     }
 
 
@@ -69,7 +75,7 @@ class OrganizerController extends Controller
             $user = $this->user->create($request->all());
             if ($user) {
                 if ($user)
-                    Mail::send('backend.email.addUser', ['userName' => $request->name, 'password' => $password], function ($m) use ($request) {
+                    Mail::send('admin.email.addUser', ['userName' => $request->name, 'password' => $password], function ($m) use ($request) {
                         $m->to($request->email)->subject('User Registration Information');
                     });
                 session()->flash('success', 'Organizer Successfully Created!');
@@ -83,7 +89,7 @@ class OrganizerController extends Controller
 
         } catch (\Exception $e) {
             $e = $e->getMessage();
-            session()->flash('error', 'Exception : Something went wrong');
+            session()->flash('error', 'Exception :',$e);
             return back();
         }
     }
@@ -184,6 +190,36 @@ class OrganizerController extends Controller
             session()->flash('error', 'EXCEPTION' . $exception);
             return back();
 
+        }
+    }
+
+
+    public function events()
+    {
+        $events = $this->event->get();
+        return view('admin.events', compact('events'));
+    }
+
+    public function eventStatus($id)
+    {
+        try {
+            $id = (int)$id;
+            $event = $this->event->find($id);
+            if ($event->status == 'active') {
+                $event->status = 'inactive';
+                $event->save();
+                session()->flash('success', 'Event has been Activated!');
+                return back();
+            } else {
+                $event->status = 'active';
+                $event->save();
+                session()->flash('success', 'Event has been Deactivated!');
+                return back();
+            }
+
+        } catch (\Exception $e) {
+            $exception = $e->getMessage();
+            session()->flash('error', 'EXCEPTION : Something Went Wrong!' );
         }
     }
 }

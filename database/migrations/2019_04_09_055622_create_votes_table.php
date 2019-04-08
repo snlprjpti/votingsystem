@@ -21,6 +21,10 @@ class CreateVotesTable extends Migration
 
             $table->integer('voter_id');
 
+            $table->integer('event_id');
+
+            $table->integer('post_id');
+
             $table->timestamps();
         });
     }

@@ -56,34 +56,68 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="settings">
 
-                                        <?php  $posts = \App\Repository\OrganizerRepository::getPostByOrganizer(Auth::user()->organizer_id);
-                                        ?>
+                                        @if(count($vote) == 0)
+                                            <?php  $posts = \App\Repository\OrganizerRepository::getPostByOrganizer(Auth::user()->organizer_id);
+                                            ?>
 
-                                        @if(!empty($posts))
+                                            @if(!empty($posts))
+
                                                 @foreach($posts as $post)
-                                                    <h4>{{$post->post_name}}</h4>
+                                                    <form action="{{url('voter/event/vote',$event->id)}}" method="post">
+                                                        {{csrf_field()}}
+                                                        <h4>{{$post->post_name}}</h4>
+                                                        <table class="table table-bordered table-hover table-responsive">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Candidates</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <body>
+                                                            <?php
 
+                                                            $candidates = \App\Repository\OrganizerRepository::getCandidateByPost($post->id);
+                                                            ?>
+                                                            @forelse($candidates as $candidate)
+                                                                <tr>
+                                                                    <td>{{$candidate->candidate_name}}</td>
+                                                                    <td style="width:10px;">
+                                                                        <input type="checkbox"
+                                                                               value="{{$candidate->id}}"
+                                                                               name="vote[{{$post->id}}][]">
+                                                                    </td>
+                                                                </tr>
+                                                            @empty
+                                                                <tr>
+                                                                    <td>No Candidates</td>
+                                                                    <td style="width:10px;"></td>
+                                                                </tr>
+                                                            @endforelse
+                                                            </body>
+                                                        </table>
 
-                                                <table class="table table-striped table-bordered table-hover table-responsive">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Candidates</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <body>
-                                                    <?php
-
-                                                    $candidates = \App\Repository\OrganizerRepository::getCandidateByPost($post->id);
-                                                    ?>
-
-
-
-
-                                                    </body>
-                                                </table>
-                                                @endforeach
-
-                                        @endif
+                                                        <button type="submit" class="btn btn-success">Submit</button>
+                                                        @endforeach
+                                                    </form>
+                                                    @endif
+                                                    @else
+                                                        <table class="table table-bordered table-hover table-responsive">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Post</th>
+                                                                <th>Candidate</th>
+                                                            </tr>
+                                                            </thead>
+                                                            @foreach($vote as $v)
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td>{{$v->post->post_name}}</td>
+                                                                    <td>{{$v->candidate->candidate_name}}</td>
+                                                                </tr>
+                                                                </tbody>
+                                                            @endforeach
+                                                        </table>
+                                                    @endif
                                     </div>
                                 </div>
                             </div>

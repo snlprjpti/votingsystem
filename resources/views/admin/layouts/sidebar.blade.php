@@ -39,6 +39,12 @@
                         <span>Organizer</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{url('/admin/events')}}">
+                        <i class="fa fa-edge"></i>
+                        <span>Events</span>
+                    </a>
+                </li>
             @endcan
 
 

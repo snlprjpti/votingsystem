@@ -6,11 +6,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Events
+                Voters
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"> Home</a></li>
-                <li class="active">Event</li>
+                <li class="active">Voter</li>
             </ol>
         </section>
 
@@ -21,7 +21,7 @@
                 <div class="col-md-12" id="listing">
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Events</h3>
+                            <h3 class="box-title">Voters</h3>
                         </div>
                         <div class="box-body">
                             @if(!count($voters)<=0)
