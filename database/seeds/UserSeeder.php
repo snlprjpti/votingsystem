@@ -25,12 +25,6 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('o'),
                 'type' => 'org'
             ],
-            [
-                'name' => 'Voter',
-                'email' => 'v@v.com',
-                'password' => bcrypt('v'),
-                'type' => 'voter'
-            ],
         ];
         DB::table('users')->insert($rows);
     }
