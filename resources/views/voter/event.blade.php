@@ -56,15 +56,14 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="settings">
 
-                                        @if(count($vote) == 0)
+                                    @if(count($vote) == 0)
                                             <?php  $posts = \App\Repository\OrganizerRepository::getPostByOrganizer(Auth::user()->organizer_id);
                                             ?>
 
                                             @if(!empty($posts))
-
-                                                @foreach($posts as $post)
-                                                    <form action="{{url('voter/event/vote',$event->id)}}" method="post">
-                                                        {{csrf_field()}}
+                                                <form action="{{url('voter/event/vote',$event->id)}}" method="post">
+                                                    {{csrf_field()}}
+                                                    @foreach($posts as $post)
                                                         <h4>{{$post->post_name}}</h4>
                                                         <table class="table table-bordered table-hover table-responsive">
                                                             <thead>
@@ -96,28 +95,28 @@
                                                             </body>
                                                         </table>
 
-                                                        <button type="submit" class="btn btn-success">Submit</button>
-                                                        @endforeach
-                                                    </form>
-                                                    @endif
-                                                    @else
-                                                        <table class="table table-bordered table-hover table-responsive">
-                                                            <thead>
-                                                            <tr>
-                                                                <th>Post</th>
-                                                                <th>Candidate</th>
-                                                            </tr>
-                                                            </thead>
-                                                            @foreach($vote as $v)
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td>{{$v->post->post_name}}</td>
-                                                                    <td>{{$v->candidate->candidate_name}}</td>
-                                                                </tr>
-                                                                </tbody>
-                                                            @endforeach
-                                                        </table>
-                                                    @endif
+                                                    @endforeach
+                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                </form>
+                                            @endif
+                                        @else
+                                            <table class="table table-bordered table-hover table-responsive">
+                                                <thead>
+                                                <tr>
+                                                    <th>Post</th>
+                                                    <th>Candidate</th>
+                                                </tr>
+                                                </thead>
+                                                @foreach($vote as $v)
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>{{$v->post->post_name}}</td>
+                                                        <td>{{$v->candidate->candidate_name}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                @endforeach
+                                            </table>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
