@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->enum('type',['admin','org','voter']);
             $table->enum('can_vote',['yes','no'])->default('no');
             $table->integer('organizer_id')->nullable();
+            $table->string('citizenship_number')->nullable();
+            $table->string('phone_number')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
